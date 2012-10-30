@@ -1,0 +1,45 @@
+<section id="userscontroller">
+  <h3>Users Controller</h3>	
+  <ol class="olist">
+    <li>
+      It’s time to create a second Controller, the Users controller. As before, we’ll use generate to make the simplest controller that meets our present needs, namely, one with a stub signup page for new users. Following the conventional REST architecture favored by Rails, we’ll call the action for new users <code>new</code> and pass it as an argument to <code>generate controller</code> to create it automatically<br>
+      <code>rails generate controller Users new --no-test-framework</code>
+    </li>
+    <li>
+      There are <b>3 places to check</b>, when creating new ACTIONS for Users:<br>
+      <br>
+    <div class="row">
+      <div class="span8">
+        <h4>config/routes.rb</h4><br>
+        <%= image_tag("015.png", alt: "pix") %>
+        <p>
+          We give the link a name '/signup' and match it to: 'users#new' which refers to app/views/users/new.html.erb
+        </p>
+      </div>
+      <div class="span8">
+        <br>
+        <h4>app/controllers/users_controller.rb</h4><br>
+        <%= image_tag("016.png", alt: "pix") %>
+      </div>        
+      <div class="span8">
+        <br>
+        <h4>app/views/users/ACTION.html.erb</h4><br>
+        <%= image_tag("017.png", alt: "pix") %>
+      </div>
+    </div>
+  </ol>
+</section>
+<section>
+  <h3>Test Driven Development @ User Pages</h3>
+  <ol class="olist">
+    <li>
+      In test-driven development, we first write a failing test, represented in many testing tools by the color red. We then implement code to get the test to pass, represented by the color green. Finally, if necessary, we refactor the code, changing its form (by eliminating duplication, for example) without changing its function. This cycle is known as “Red, Green, Refactor”.<br>
+      <code>rails generate integration_test user_pages</code><br>
+      The RSPEC test is located:
+    </li>
+    <li>
+      <h4>spec/requests/user_pages_spec.rb</h4><br>
+      <%= image_tag("018.png", alt: "pix") %>
+    </li>
+  </ol>
+</section>

@@ -1,0 +1,240 @@
+<section id="relationshipmodel">
+  <h3>Relationship Model</h3>	
+  <ol class="olist">
+    <li>
+      To get started with the implementation, we first generate a Relationship model as follows:<br>
+      <code>rails generate model Relationship follower_id:integer followed_id:integer</code>
+    </li>
+    <li>
+      There are <b>3 places to check</b>, when creating a MODEL for a Relationship:<br>
+      <br>
+    </li>
+    <div class="row">
+      <div class="span8">
+        <h4>db/migrate/[timestamp]_create_relationships.rb</h4><br>
+        <%= image_tag("074.png", alt: "pix") %>
+        <p>
+          We are gonna change this file now:<br>
+        </p>
+        <%= image_tag("073.png", alt: "pix") %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="span8">
+        <br>
+        <p>
+          To create the relationships table, we migrate the database and prepare the test database as usual:<br>
+          <code>bundle exec rake db:migrate</code><br>
+          <code>bundle exec rake db:test:prepare</code><br>
+        </p>
+        <p>
+          The result is the Relationship data model shown:
+        </p>
+        <%= image_tag("075.png", alt: "pix") %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="span8">
+        <br>
+        <h4>app/models/relationship.rb</h4><br>
+        <%= image_tag("076.png", alt: "pix") %>
+        <p>
+          We're gonna edit a lot in this file. This is the code for the Relationship Model. Everytime we change something related to the database we must run the following command, in order to update the <b>db/development.sqlite3:</b><br>
+          <code>bundle exec rake db:migrate</code><br>
+          <code>bundle exec rake db:test:prepare</code><br>
+        </p>
+      </div>   
+    </div>
+        <div class="row">
+      <div class="span8">
+        <br>
+        <h4>WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWconfig/routes.rb</h4><br>
+        <%= image_tag("044.png", alt: "pix") %>
+        <p>
+          The code <code>resources :microposts</code> endows our sample application with all the actions needed for a RESTful Micropost resource.</b><br>
+          <%= image_tag("045.png", alt: "pix") %>
+        </p>
+      </div>   
+    </div>
+  </ol>
+</section>
+<section>
+  <h3>User/Relationship associations</h3>
+  <ol class="olist">
+    <li>
+      Before implementing followed users and followers, we first need to establish the association between users and relationships. A user has_many relationships, and—since relationships involve two users—a relationship belongs_to both a follower and a followed user.
+    </li>
+    <li>
+      Implementing the user/relationships <code>has_many</code> association:
+      <h4>app/models/user.rb</h4>
+      <%= image_tag("077.png", alt: "pix") %>
+    </li>
+    <li>
+      Adding the <code>belongs_to</code> associations to the Relationship model:
+      <h4>app/models/relationship.rb</h4>
+      <%= image_tag("078.png", alt: "pix") %>
+    </li>
+    <li>
+      Adding the Relationship model validations:
+      <h4>app/models/relationship.rb</h4>
+      <%= image_tag("079.png", alt: "pix") %>
+    </li>
+    <li>
+       Adding the User model <code>followed_users</code> association:<br>
+       <h4>app/models/user.rb</h4>
+      <%= image_tag("080.png", alt: "pix") %>      
+    </li>
+    <li>
+       The <code>following?</code> and <code>follow!</code> utility methods:<br>
+       <h4>app/models/user.rb</h4>
+      <%= image_tag("081.png", alt: "pix") %>      
+    </li>
+    <li>
+        Unfollowing a user by destroying a user relationship:<br>
+       <h4>app/models/user.rb</h4>
+      <%= image_tag("082.png", alt: "pix") %>      
+    </li>
+  </ol>
+</section>
+<section>
+  <h3>Followers</h3>
+  <ol class="olist">
+    <li>
+      The final piece of the relationships puzzle is to add a <code>user.followers</code> method to go with <cod>user.followed_users</code>. You may have noticed that all the information needed to extract an array of followers is already present in the relationships table. Indeed, the technique is exactly the same as for user following, with the roles of <code>follower_id</code> and <code>followed_id</code> reversed. This suggests that, if we could somehow arrange for a reverse_relationships table with those two columns reversed, we could implement <code>user.followers</code> with little effort.
+      <%= image_tag("083.png", alt: "pix") %>      
+    </li>
+    <li>
+      Implementing user.followers using reverse relationships:<br>
+      <h4>app/models/user.rb</h4>
+      <%= image_tag("084.png", alt: "pix") %>
+    </li>
+  </ol>
+</section>
+<section>
+  <h3>A web interface for following users</h3>
+  <ol class="olist">
+    <li>
+      Adding following/follower relationships to the sample data:<br>
+      <h4>lib/tasks/sample_data.rake</h4>
+      <%= image_tag("085.png", alt: "pix") %>
+    </li>
+    <li>
+      To execute the code, populate the database as usual:<br>
+        <code>bundle exec rake db:reset</code><br>
+        <code>bundle exec rake db:populate</code><br>
+        <code>bundle exec rake db:test:prepare</code><br>
+    </li>
+  </ol>
+</section>
+<section>
+  <h3>Stats and a follow form</h3>
+  <ol class="olist">
+    <li>
+      Now that our sample users have both followed user and followers arrays, we need to update the profile page and Home page to reflect this.
+    </li>
+    <li>
+     Adding following and followers actions to the Users controller:<br>
+      <h4>config/routes.rb</h4>
+      <%= image_tag("086.png", alt: "pix") %>
+    </li>
+    <li>
+     RESTful routes provided by the custom rules in resource:<br>
+      <%= image_tag("087.png", alt: "pix") %>
+    </li>
+    <li>
+     A partial for displaying follower stats:<br>
+      <h4>app/views/shared/_stats.html.erb</h4>
+      <%= image_tag("088.png", alt: "pix") %>
+    </li>
+    <li>
+      Adding follower stats to the Home page:<br>
+      <h4>app/views/static_pages/home.html.erb</h4>
+      <%= image_tag("089.png", alt: "pix") %>
+    </li>
+    <li>
+      A partial for a follow/unfollow form:<br>
+      <h4>app/views/users/_follow_form.html.erb</h4>
+      <%= image_tag("090.png", alt: "pix") %>
+    </li>
+    <li>
+      Adding the routes for user relationships:<br>
+      <h4>config/routes.rb</h4>
+      <%= image_tag("091.png", alt: "pix") %>
+    </li>
+    <li>
+      A form for following a user:<br>
+      <h4>app/views/users/_follow.html.erb</h4>
+      <%= image_tag("092.png", alt: "pix") %>
+    </li>
+    <li>
+      A form for unfollowing a user:<br>
+      <h4>app/views/users/_unfollow.html.erb</h4>
+      <%= image_tag("093.png", alt: "pix") %>
+    </li>
+    <li>
+      Adding the follow form and follower stats to the user profile page:<br>
+      <h4>app/views/users/show.html.erb</h4>
+      <%= image_tag("094.png", alt: "pix") %>
+    </li>
+  </ol>
+</section>
+<section>
+  <h3>Following and Followers page</h3>
+  <ol class="olist">
+    <li>
+      Pages to display followed users and followers will resemble a hybrid of the user profile page and the user index page, with a sidebar of user information (including the following stats) and a list of users. In addition, we’ll include a raster of user profile image links in the sidebar.
+    </li>
+    <li>
+     The following and followers actions:<br>
+      <h4>app/controllers/users_controller.rb</h4>
+      <%= image_tag("095.png", alt: "pix") %>
+    </li>
+    <li>
+     The show_follow view used to render following and followers:<br>
+      <h4>app/views/users/show_follow.html.erb</h4>
+      <%= image_tag("096.png", alt: "pix") %>
+    </li>
+  </ol>
+</section>
+<section>
+  <h3>A working Follow Button (the standard way)</h3>
+  <ol class="olist">
+    <li>
+      Now that our views are in order, it’s time to get the follow/unfollow buttons working.
+    </li>
+    <li>
+     The Relationships controller:<br>
+      <h4>app/controllers/relationships_controller.rb</h4>
+      <%= image_tag("097.png", alt: "pix") %>
+      We have to create this controller by hand!
+    </li>
+  </ol>
+</section>
+<section>
+  <h3>The status feed</h3>
+  <ol class="olist">
+    <li>
+      We come now to the pinnacle of our sample application: <b>the status feed.</b> Appropriately, this section contains some of the most advanced material in the entire tutorial. The full status feed builds on the proto-feed by assembling an array of the microposts from the users being followed by the current user, along with the current user’s own microposts. To accomplish this feat, we will need some fairly advanced Rails, Ruby, and even SQL programming techniques.
+    </li>
+    <li>
+     The basic idea behind the feed is simple. The figure shows a sample microposts database table and the resulting feed. The purpose of a feed is to pull out the microposts whose user ids correspond to the users being followed by the current user (and the current user itself), as indicated by the arrows in the diagram.
+      <%= image_tag("098.png", alt: "pix") %>
+    </li>
+    <li>
+      Adding the completed feed to the User model:<br>
+      <h4>app/models/user.rb</h4>
+      <%= image_tag("099.png", alt: "pix") %>
+    </li>
+    <li>
+     Now it’s time to implement <code>Micropost.from_users_followed_by</code>, which for simplicity we’ll just refer to as “the feed”. Since the final result is rather intricate, we’ll build up to the final feed implementation by introducing one piece at a time.<br>
+     A first cut at the from_users_followed_by method:<br>
+      <h4>app/models/micropost.rb</h4>
+      <%= image_tag("100.png", alt: "pix") %>
+    </li>
+    <li>
+     The home action with a paginated feed:<br>
+      <h4>app/controllers/static_pages_controller.rb</h4>
+      <%= image_tag("100.png", alt: "pix") %>
+    </li>    
+  </ol>
+</section>

@@ -1,0 +1,50 @@
+<section id="heroku">
+	 <div class="page-header">
+    <h2>HEROKU</h2>
+  </div>
+  	<h3>
+  		Heroku-Requirements:
+  	</h3>
+  	<ol class="olist">
+  		<li>
+  			Your Gemfile needs POSTGRESQL for Production.
+  			<ul>
+  				<code>group :production do</code> <br>
+  				<code>gem 'pg', '0.12.2'</code> <br>
+  				<code>end</code>
+  			</ul>
+  		</li>
+  	</ol>
+  	<h3>
+  		Deployment & Production with Heroku:
+  	</h3>	
+  	<ol class="olist">
+	  		<li>
+	  			cmd: <code>cd ../x1_app</code> enter.
+	  			<ul>
+	  				<code>heroku create --stack cedar</code>
+	  			</ul>
+	  			<ul>
+	  				<code>heroku rename nameilikebetter</code>
+	  			</ul>
+	  			<ul>
+	  				<code>git push heroku master</code>
+	  			</ul>
+	  		</li>
+	  		<li>
+	  			If your App has a database: find out your DATABASENAME <code>heroku config | grep POSTGRESQL</code>
+	  		</li>
+	  		<li>
+	  			Now reset, migrate and if you want populte your Database.
+	  			<ul>
+	  				<code>heroku pg:reset HEROKU_POSTGRESQL_BRONZE_URL</code>
+	  			</ul>
+	  			<ul>
+	  				<code>heroku run rake db:migrate</code>
+	  			</ul>
+	  			<ul>
+	  				<code>heroku run rake db:populate</code>
+	  			</ul>
+	  		</li>
+	  	</ol>
+</section>

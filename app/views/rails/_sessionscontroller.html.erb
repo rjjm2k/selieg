@@ -1,0 +1,125 @@
+<section id="sessionscontroller">
+  <h3>Sessions Controller</h3>	
+  <ol class="olist">
+    <li>
+      The elements of signing in and out correspond to particular REST actions of the Sessions controller: the signin form is handled by the <code>new</code> action, actually signing in is handled by sending a <b>POST</b> request to the <code>create</code> action, and signing out is handled by sending a <b>DELETE</b> request to the <code>destroy</code> action. To get started, we’ll generate a Sessions controller and an integration test for the authentication machinery:<br>
+      <code>rails generate controller Sessions --no-test-framework</code><br>
+      <code>rails generate integration_test authentication_pages</code>
+    </li>
+    <li>
+      There are <b>3 places to check</b>, when creating new ACTIONS for Users:<br>
+      <br>
+    <div class="row">
+      <div class="span8">
+        <h4>config/routes.rb</h4><br>
+        <%= image_tag("015.png", alt: "pix") %>
+        <p>
+          <code>resources :sessions, only: [:new,:create, :destroy]</code><br>
+          <code>match '/signin',  to: 'sessions#new'</code><br>
+          <code>match '/signout', to: 'sessions#destroy', via: :delete</code><br>
+          Since we have no need to show or edit sessions, we’ve restricted the actions to new, create, and destroy using the <b>:only</b> option accepted by resources. And we name URLs like "/signin" and match them to "sessions#new". Note the use of via: :delete for the signout route, which indicates that it should be invoked using an HTTP DELETE request.
+        </p>
+        <%= image_tag("034.png", alt: "pix") %><br>
+        <p>
+          RESTful routes provided by the code <code>resources :sessions</code>.
+        </p>
+      </div>
+      <div class="span8">
+        <br>
+        <h4>app/controllers/sessions_controller.rb</h4><br>
+        <%= image_tag("031.png", alt: "pix") %><br>
+        <p>
+          Here we define the actions more specificly.
+        </p>
+      </div>        
+      <div class="span8">
+        <br>
+        <h4>app/views/sessions/new.html.erb</h4><br>
+        <%= image_tag("032.png", alt: "pix") %>
+        <p>
+          Note that, since it is the page for a new session, the signin page lives in the file app/views/sessions/new.html.erb, which we have to create.
+        </p>
+      </div>
+    </div>
+  </ol>
+</section>
+<section>
+  <h3>Test Driven Development @ Sessions Controller</h3>
+  <ol class="olist">
+    <li>
+      In the process of writing the tests, we’ll be forced to design aspects of the application, which is one of the nice side-effects of test-driven development. 
+    </li>
+    <li>
+      <h4>spec/requests/authentication_pages_spec.rb</h4><br>
+      <%= image_tag("033.png", alt: "pix") %>
+    </li>
+  </ol>
+</section>
+<section>
+  <h3>Remember Me</h3>
+  <ol class="olist">
+    <li>
+      Including the Sessions helper module into the Application controller. 
+    </li>
+    <li>
+      <h4>app/controllers/application_controller.rb</h4><br>
+      <%= image_tag("035.png", alt: "pix") %>
+      <p>
+        By default, all the helpers are available in the views but not in the controllers. We need the methods from the Sessions helper in both places, so we have to include it explicitly.
+      </p>
+    </li>
+    <li>
+      The remember token needs to be associated with a user and stored for future use, so we’ll add it as an attribute to the User model:<br>
+      <%= image_tag("036.png", alt: "pix") %>
+    </li>
+    <li>
+      <code>rails generate migration add_remember_token_to_users</code><br>
+      <h4>db/migrate/[ts]_add_remember_token_to_user.rb</h4><br>
+      <%= image_tag("037.png", alt: "pix") %>
+    </li>
+    <li>
+      Next we update the development and test databases as usual:<br>
+      <code>bundle exec rake db:migrate</code><br>
+      <code>bundle exec rake db:test:prepare</code><br>
+    </li>   
+  </ol>
+</section>
+<section>
+  <h3>be_admin</h3>
+  <ol class="olist">
+    <li>
+      We will identify privileged administrative users with a boolean admin attribute in the User model, which, as we’ll see, will automatically lead to an admin? boolean method to test for admin status.  
+    </li>
+    <li>
+      As usual, we add the admin attribute with a migration, indicating the boolean type on the command line:<br>
+      <code>rails generate migration add_admin_to_users admin:boolean</code>
+    </li>
+    <li>
+      <h4>db/migrate/[timestamp]_add_admin_to_users.rb</h4><br>
+      <%= image_tag("038.png", alt: "pix") %>
+    </li>
+    <li>
+      Note that we’ve added the argument default: false to add_column, which means that users will not be administrators by default.
+    </li>
+    <li>
+      The User model with an added admin boolean attribute:
+      <%= image_tag("039.png", alt: "pix") %>
+    </li>
+    <li>
+      Finally, we migrate the development database and prepare the test database:<br>
+      <code>bundle exec rake db:migrate</code><br>
+      <code>bundle exec rake db:test:prepare</code><br>
+    </li>
+    <li>
+      The sample data populator code with an admin user:<br>
+      <h4>lib/tasks/sample_data.rake</h4><br>
+      <%= image_tag("040.png", alt: "pix") %>
+    </li>
+    <li>
+      Then reset the database and re-populate the sample data:<br>
+      <code>bundle exec rake db:reset</code><br>
+      <code>bundle exec rake db:populate</code><br>
+      <code>bundle exec rake db:test:prepare</code><br>
+    </li>  
+  </ol>
+</section>

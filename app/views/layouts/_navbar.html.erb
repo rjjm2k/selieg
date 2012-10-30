@@ -1,0 +1,46 @@
+<div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <%= link_to "UN!PHOBIA", root_path, id: "logo" %>
+        <nav class="nav- pull-right">
+          <ul class="nav">
+            <li><a href="/"><i class="icon-home icon-white"></i> HOME</a></li>            
+      <% if signed_in? %>
+            <li><a href="/uni"><i class="icon-search icon-white"></i> UNIS</a></li>
+            <li><a href="/users"><i class="icon-search icon-white"></i> USERS</a></li>
+            <li><a href="/codebase"><i class="icon-barcode icon-white"></i> CODEBASE</a></li>
+            <li id="fat-menu" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user icon-white"></i> ACCOUNT <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><%= link_to "Profil", current_user %></li>
+                <li><%= link_to "Einstellungen", edit_user_path(current_user) %></li>
+                <li class="divider"></li>
+                <li>
+                  <%= link_to "Abmelden", signout_path, method: "delete" %>
+                </li>
+              </ul>
+            </li>
+          <% if user_be_admin? %>
+            <li id="fat-menu" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-star icon-white"></i><b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><%= link_to "Vorlesung erstellen",  signup_vorlesung_path %></li>
+                <li><%= link_to "Semester erstellen",   signup_semester_path %></li>
+                <li><%= link_to "Uni erstellen",        signup_uni_path %></li>
+              </ul>
+            </li>
+          <% end %>   
+      <% else %>
+            <form class="form-inline" accept-charset="UTF-8" action="/sessions" method="post"> 
+              <input id="session_email" name="session[email]" type="text" class="input-small" placeholder="Email">
+              <input id="session_password" name="session[password]" type="password" class="input-small" placeholder="Password">
+              <input class="btn btn-large btn-warning" name="commit" type="submit" value="Sign in">
+            </form>  
+      <% end %>     
+          </ul>
+        </nav>
+    </div>
+  </div>
+</div>

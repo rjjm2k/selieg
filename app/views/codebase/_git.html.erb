@@ -1,0 +1,40 @@
+<section id="git">
+  <div class="page-header">
+    <h2>GIT</h2>
+  </div>
+  	<h3>
+  		Overwrite existing GIT-Repository:
+  	</h3>	
+  	<ol class="olist">
+  		<li>
+  			Create: <code>../rails_projects/x1_app</code> and enter.
+  		</li>
+  		<li>
+  			Copy entire structure from <code>y2_app</code> into the current folder.
+  		</li>
+  		<li>
+  			Open <code>x1_app/.git/config</code> with editor and delete everything but [core] area plus its paragraphs. Save.
+  		</li>
+  		<li>
+  			Create new <a href="https://github.com/login">Github</a> repository. Name: x1_app
+  		</li>
+  		<li>
+  			cmd: <code>cd ../x1_app</code> enter.
+  			<ul>
+  				<code>git init</code>
+  			</ul>
+  			<ul>
+  				<code>git add .</code>
+  			</ul>
+  			<ul>
+  				<code>git commit -m "new first commit"</code>
+  			</ul>
+  			<ul>
+  				<code>git remote add origin https://github.com/"username"/x1_app.git</code>
+  			</ul>
+  			<ul>
+  				<code>git push -u origin master</code>
+  			</ul>
+  		</li>
+  	</ol>
+</section>

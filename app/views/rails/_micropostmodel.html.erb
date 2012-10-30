@@ -1,0 +1,217 @@
+<section id="micropostmodel">
+  <h3>Micropost Model</h3>	
+  <ol class="olist">
+    <li>
+      The Micropost model needs only two attributes: a <b>content</b> attribute to hold the micropost’s content, and a <b>user_id</b> to associate a micropost with a particular user. As with the case of the User model, we generate it using:<br>
+      <code>rails generate model Micropost content:string user_id:integer</code>
+    </li>
+    <li>
+      There are <b>3 places to check</b>, when creating a MODEL for a Micropost:<br>
+      <br>
+    </li>
+    <div class="row">
+      <div class="span8">
+        <h4>db/migrate/[timestamp]_create_microposts.rb</h4><br>
+        <%= image_tag("041.png", alt: "pix") %>
+        <p>
+          We're not gonna change this file ever.
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="span8">
+        <br>
+        <p>
+          The result is a Micropost model with the structure shown:
+        </p>
+        <%= image_tag("042.png", alt: "pix") %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="span8">
+        <br>
+        <h4>app/models/micropost.rb</h4><br>
+        <%= image_tag("043.png", alt: "pix") %>
+        <p>
+          We're gonna edit a lot in this file. This is the code for the Micropost Model. Everytime we change something related to the database we must run the following command, in order to update the <b>db/development.sqlite3:</b><br>
+          <code>bundle exec rake db:migrate</code><br>
+          <code>bundle exec rake db:test:prepare</code><br>
+        </p>
+      </div>   
+    </div>
+        <div class="row">
+      <div class="span8">
+        <br>
+        <h4>config/routes.rb</h4><br>
+        <%= image_tag("044.png", alt: "pix") %>
+        <p>
+          The code <code>resources :microposts</code> endows our sample application with all the actions needed for a RESTful Micropost resource.</b><br>
+          <%= image_tag("045.png", alt: "pix") %>
+        </p>
+      </div>   
+    </div>
+  </ol>
+</section>
+<section>
+  <h3>User/Micropost associations</h3>
+  <ol class="olist">
+    <li>
+      When constructing data models for web applications, it is essential to be able to make associations between individual models. In the present case, each micropost is associated with one user, and each user is associated with (potentially) many microposts:
+      <%= image_tag("046.png", alt: "pix") %>
+    </li>
+    <li>
+      Using the belongs_to/has_many association defined in this section, Rails constructs the methods shown:
+      <%= image_tag("047.png", alt: "pix") %>
+    </li>
+    <li>
+      <h4>A micropost <code>belogs_to</code> a user:</h4><br>
+      <%= image_tag("048.png", alt: "pix") %>
+    </li>
+    <li>
+      <h4>A user <code>has_many</code> microposts:</h4><br>
+      <%= image_tag("049.png", alt: "pix") %>
+    </li>
+    <li>
+      To get the ordering test to pass, we use a Rails facility called default_scope with an :order parameter:<br>
+      <%= image_tag("050.png", alt: "pix") %>      
+    </li>
+  </ol>
+</section>
+<section>
+  <h3>Augmenting the user show page</h3>
+  <ol class="olist">
+    <li>
+      Adding microposts to the user show page.<br>
+      <h4>app/views/users/show.html.erb</h4>
+      <%= image_tag("051.png", alt: "pix") %>
+    </li>
+    <li>
+      A partial for showing a single micropost.
+      <h4>app/views/microposts/_micropost.html.erb</h4>
+      <%= image_tag("052.png", alt: "pix") %>
+    </li>
+    <li>
+      Adding an @microposts instance variable to the user show action. 
+      <h4>app/controllers/users_controller.rb</h4>
+      <%= image_tag("053.png", alt: "pix") %>      
+    </li>
+  </ol>
+</section>
+<section>
+  <h3>Access Control</h3>
+  <ol class="olist">
+    <li>
+      Moving the signed_in_user method into the Sessions helper.<br>
+      <b>app/helpers/sessions_helper.rb</b>
+      <%= image_tag("054.png", alt: "pix") %>
+    </li>
+    <li>
+      Adding authentication to the Microposts controller actions. 
+      <b>app/controllers/microposts_controller.r</b>
+      <%= image_tag("055.png", alt: "pix") %>
+    </li>
+  </ol>
+</section>
+<section>
+  <h3>Creating Microposts</h3>
+  <ol class="olist">
+    <li>
+      We’ll start with the <code>create</code> action for microposts, which is similar to its user analogue; the principal difference lies in using the user/micropost association to build the new micropost:<br>
+      <h4>app/controllers/microposts_controller.rb</h4>
+      <%= image_tag("056.png", alt: "pix") %>
+    </li>
+    <li>
+     Adding microposts creation to the Home page:<br>
+      <h4>app/views/static_pages/home.html.erb</h4>
+      <%= image_tag("057.png", alt: "pix") %>
+    </li>
+    <li>
+     The partial for the user info sidebar:<br>
+      <h4>app/views/shared/_user_info.html.erb</h4>
+      <%= image_tag("058.png", alt: "pix") %>
+    </li>
+    <li>
+     The form partial for creating microposts:<br>
+      <h4>app/views/shared/_micropost_form.html.erb</h4>
+      <%= image_tag("059.png", alt: "pix") %>
+    </li>
+    <li>
+      Adding a micropost instance variable to the home action:<br>
+      <h4>app/controllers/static_pages_controller.rb</h4>
+      <%= image_tag("060.png", alt: "pix") %>
+    </li>
+    <li>
+      Updating the error-messages partial from Listing 7.23 to work with other objects:<br>
+      <h4>app/views/shared/_error_messages.html.erb</h4>
+      <%= image_tag("061.png", alt: "pix") %>
+    </li>
+    <li>
+      Updating the rendering of user signup errors:<br>
+      <h4>app/views/users/new.html.erb</h4>
+      <%= image_tag("062.png", alt: "pix") %>
+    </li>
+    <li>
+      Updating the errors for editing users:<br>
+      <h4>app/views/users/edit.html.erb</h4>
+      <%= image_tag("063.png", alt: "pix") %>
+    </li>
+  </ol>
+</section>
+<section>
+  <h3>A proto-feed</h3>
+  <ol class="olist">
+    <li>
+      A preliminary implementation for the micropost status feed:<br>
+      <h4>app/models/user.rb</h4>
+      <%= image_tag("064.png", alt: "pix") %>
+    </li>
+    <li>
+     Adding a feed instance variable to the home action:<br>
+      <h4>app/controllers/static_pages_controller.rb</h4>
+      <%= image_tag("065.png", alt: "pix") %>
+    </li>
+    <li>
+     The status feed partial:<br>
+      <h4>app/views/shared/_feed.html.erb</h4>
+      <%= image_tag("066.png", alt: "pix") %>
+    </li>
+    <li>
+     A partial for a single feed item:<br>
+      <h4>app/views/shared/_feed_item.html.erb</h4>
+      <%= image_tag("067.png", alt: "pix") %>
+    </li>
+    <li>
+      Adding a status feed to the Home page:<br>
+      <h4>app/views/static_pages/home.html.erb</h4>
+      <%= image_tag("068.png", alt: "pix") %>
+    </li>
+    <li>
+      Adding an (empty) @feed_items instance variable to the create action:<br>
+      <h4>app/controllers/microposts_controller.rb</h4>
+      <%= image_tag("069.png", alt: "pix") %>
+    </li>
+  </ol>
+</section>
+<section>
+  <h3>Destroying microposts</h3>
+  <ol class="olist">
+    <li>
+      The last piece of functionality to add to the Microposts resource is the ability to destroy posts. As with user deletion, we accomplish this with “delete” links. Unlike that case, which restricted user destruction to admin users, the delete links will work only for microposts created by the current user.
+    </li>
+    <li>
+     Adding a delete link to the micropost partial:<br>
+      <h4>app/views/microposts/_micropost.html.erb</h4>
+      <%= image_tag("070.png", alt: "pix") %>
+    </li>
+    <li>
+     The feed item partial with added delete link:<br>
+      <h4>app/views/shared/_feed_item.html.erb</h4>
+      <%= image_tag("071.png", alt: "pix") %>
+    </li>
+    <li>
+     The Microposts controller destroy action:<br>
+      <h4>app/controllers/microposts_controller.rb</h4>
+      <%= image_tag("072.png", alt: "pix") %>
+    </li>
+  </ol>
+</section>

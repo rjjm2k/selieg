@@ -1,0 +1,164 @@
+<section id="usermodel">
+  <h3>User Model</h3>	
+  <ol class="olist">
+    <li>
+      It’s time to create a User Model. Note that, in contrast to the plural convention for controller names, model names are singular: a Users controller, but a User model. By passing the optional parameters <code>name:string</code> and <code>email:string</code>, we tell Rails about the two attributes we want, along with what types those attributes should be (in this case, string).<br>
+      <code>rails generate model User name:string email:string</code>
+    </li>
+    <li>
+      There are <b>3 places to check</b>, when creating a MODEL for a User:<br>
+      <br>
+    </li>
+    <div class="row">
+      <div class="span8">
+        <h4>db/migrate/[timestamp]_create_users.rb</h4><br>
+        <%= image_tag("019.png", alt: "pix") %>
+        <p>
+          We're not gonna change this file ever.
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="span8">
+        <br>
+        <p>
+          The migration itself consists of a change method that determines the change to be made to the database. In our case, <code>change</code> uses a Rails method called <code>create_table</code> to create a table in the database for storing users. The final line in the block, t.timestamps, is a special command that creates two magic columns called <code>created_at</code> and <code>updated_at</code>, which are timestamps that automatically record when a given user is created and updated.
+        </p>
+        <%= image_tag("021.png", alt: "pix") %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="span8">
+        <br>
+        <h4>app/models/user.rb</h4><br>
+        <%= image_tag("020.png", alt: "pix") %>
+        <p>
+          We're gonna edit a lot in this file. This is the code for the User Model. Everytime we change something related to the database we must run the following command, in order to update the <b>db/development.sqlite3:</b><br>
+          <code>bundle exec rake db:migrate</code>
+          <code>bundle exec rake db:test:prepare</code><br>
+        </p>
+      </div>   
+    </div>
+        <div class="row">
+      <div class="span8">
+        <br>
+        <h4>config/routes.rb</h4><br>
+        <%= image_tag("015.png", alt: "pix") %>
+        <p>
+          The code <code>resources :users</code> doesn’t just add a working /users/1 URL; it endows our sample application with all the actions needed for a RESTful Users resource, along with a large number of named routes for generating user URIs</b><br>
+          <%= image_tag("030.png", alt: "pix") %>
+        </p>
+      </div>   
+    </div>
+    <li>
+      We are gonna work only in the <b>app/models/user.rb</b> and the <b>spec/models/user_spec.rb</b> files.
+    </li>
+  </ol>
+</section>
+<section>
+  <h3>Model Annotation</h3>
+  <ol class="olist">
+    <li>
+      Although it’s not strictly necessary, you might find it convenient to annotate your Rails models using the annotate gem
+      <%= image_tag("022.png", alt: "pix") %>
+    </li>
+    <li>
+      We place the annotate gem in a "group :development" block (analogous to group :test) because the annotations aren’t needed in production applications. We next install it with
+      <code>bundle install</code>
+    </li>
+    <li>
+      The result of running <code>bundle exec annotate</code> is the following code in the <b>app/models/user.rb</b>:
+      <%= image_tag("023.png", alt: "pix") %>
+    </li>
+  </ol>
+</section>
+<section>
+  <h3>Accessible attributes</h3>
+  <ol class="olist">
+    <li>
+      Let’s revisit the User model, focusing now on the attr_accessible line. This line tells Rails which attributes of the model are accessible, i.e., which attributes can be modified automatically by outside users (such as users submitting requests with web browsers).
+    </li>
+    <li>
+      The code doesn’t do quite what you might think. By default, all model attributes are accessible. What the code does is to ensure that the name, email, password and password_confirmation attributes <b>—and only these attributes—</b> are automatically accessible to outside users.
+      <%= image_tag("024.png", alt: "pix") %>
+    </li>
+  </ol>
+</section>
+<section>
+  <h3>Test Driven Development @ User Model</h3>
+  <ol class="olist">
+    <li>
+      As with the other features of our app, we’ll add User model validations using test-driven development. Because we didn’t pass the <code>--no-test-framework</code> flag when we generated the User model, the command produced an initial spec for testing users, but in this case it’s practically blank.<br>
+      <b>spec/models/user_spec.rb</b>
+      <%= image_tag("025.png", alt: "pix") %>
+    </li>
+    <li>
+      This is the location where all our tests regarding the User Model will be edited.
+    </li>
+    <li>
+      Even though we created a development database with <code>rake db:migrate</code>, the tests would fail right now because the test database doesn’t yet know about the data model (indeed, it doesn’t yet exist at all).
+    </li>
+    <li>
+      We can create a test database with the correct structure, and thereby get the tests to pass, using the command:<br>
+      <code>bundle exec rake db:test:prepare</code>
+    </li>
+  </ol>
+</section>
+<section>
+  <h3>Adding Structure to an existing model</h3>
+  <h4>add_index_to_users_email</h4>
+  <ol class="olist">
+    <li>
+      We need to create a migration directly using the migration generator:<br>
+      <code>rails generate migration add_index_to_users_email</code>
+      <%= image_tag("026.png", alt: "pix") %>
+    </li>
+    <li>
+     The final step is to migrate the database:<br>
+     <code>bundle exec rake db:migrate</code>
+    </li>
+    <li>
+      Unfortunately, there’s one more change we need to make to be assured of email uniqueness, which is to make sure that the email address is all lower-case before it gets saved to the database.
+    </li>
+    <li>
+      So we have to add this line o code to the <b>user.rb</b>:<br>
+      <code>before_save { |user| user.email = email.downcase }</code>
+    </li>
+  </ol>
+  <h4>add_password_digest_to_users</h4>
+  <ol class="olist">
+    <li>
+      Adding bcrypt-ruby to the Gemfile:<br>
+      <code>gem 'bcrypt-ruby', '3.0.1'</code><br>
+      And then run <code>bundle install</code>
+    </li>
+    <li>
+      TDD's first step is to add code in the <b>spec/models/user_spec.rb</b>:<br>
+      <%= image_tag("029.png", alt: "pix") %>
+    </li>
+    <li>
+      To get the test to pass, we first generate an appropriate migration for the password_digest column:<br>
+      <code>rails generate migration add_password_digest_to_users password_digest:string</code>
+    </li>
+    <li>
+      Rails did the whole work for us, looking at <b>db/migrate/[ts]_add_password_digest_to_user.rb</b>:<br>
+      <%= image_tag("027.png", alt: "pix") %>
+    </li>
+    <li>
+      To get the failing test to pass, we need to run 3 commands:<br>
+      <code>bundle exec rake db:migrate</code><br>
+      <code>bundle exec rake db:test:prepare</code><br>
+      <code>bundle exec rspec spec/</code><br>
+    </li>
+  </ol>
+  <h4>has_secure_password</h4>
+  <ol class="olist">
+    <li>
+      TDD's first step is to add code in the <b>spec/models/user_spec.rb</b>:<br>
+      <%= image_tag("028.png", alt: "pix") %>
+    </li>
+    <li>
+      <code>:password</code> and <code>:password_confirmation</code> are both default methods for rails.
+    </li>
+  </ol>
+</section>

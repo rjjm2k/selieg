@@ -1,0 +1,81 @@
+<section id="staticpagescontroller">
+  <h3>StaticPages Controller</h3>	
+  <ol class="olist">
+		<li>Rspec must be included in Gemfile for <abbr title="Test Driven Development">TDD</abbr><br>
+      <%= image_tag("001.png", alt: "pix") %>
+		</li>
+    <li>
+      Run <code>bundle install --without production</code>
+    </li>
+    <li>
+      Next, we need to configure Rails to use RSpec in place of Test::Unit.<br>
+      This can be accomplished with: <code>rails generate rspec:install</code>
+    </li>
+    <li>
+      Since we’ll be making a controller to handle static pages, we’ll call it the StaticPages controller. We’ll also plan to make actions for a Home page, a Help page, and an About page. The generate script takes an optional list of actions, so we’ll include two of the initial actions directly on the command line<br>
+      <code>rails generate controller StaticPages home help --no-test-framework</code>
+    </li>
+    <li>
+      There are <b>3 places to check</b>, when adding new SITES:<br>
+      <br>
+    <div class="row">
+      <div class="span8">
+        <h4>config/routes.rb</h4><br>
+        <%= image_tag("002.png", alt: "pix") %>
+      </div>
+      <div class="span8">
+        <br>
+        <h4>app/controllers/static_pages_controller.rb</h4><br>
+        <%= image_tag("003.png", alt: "pix") %>
+      </div>        
+      <div class="span8">
+        <br>
+        <h4>app/views/static_pages/SITE.html.erb</h4><br>
+        <%= image_tag("004.png", alt: "pix") %>
+      </div>
+    </div>
+  </ol>
+</section>
+<section>
+  <h3>Test Driven Development @ Static Pages</h3>
+  <ol class="olist">
+    <li>
+      In test-driven development, we first write a failing test, represented in many testing tools by the color red. We then implement code to get the test to pass, represented by the color green. Finally, if necessary, we refactor the code, changing its form (by eliminating duplication, for example) without changing its function. This cycle is known as “Red, Green, Refactor”.<br>
+      <code>rails generate integration_test static_pages</code><br>
+      The RSPEC test is located:
+    </li>
+    <li>
+      <h4>spec/requests/static_pages_spec.rb</h4><br>
+      <%= image_tag("005.png", alt: "pix") %>
+    </li>
+  </ol>
+</section>
+<section>
+  <h3>To add an <abbr title="Embedded Ruby">EBR</abbr> Page Title:</h3>
+  <ol class="olist">
+    <li>
+    We need an application_helper, rspec_helper, EBR in the application.htlm.erb and EBR in all sites first lines.
+    </li>
+    <div class="row">  
+    <div class="span8">
+      <br>
+      <h4>app/helpers/application_helper.rb</h4><br>
+      <%= image_tag("006.png", alt: "pix") %>
+    </div>
+    <div class="span8">
+      <br>
+      <h4>spec/support/utilities.rb</h4><br>
+      <%= image_tag("007.png", alt: "pix") %>
+    </div>
+     <div class="span8">
+      <br>
+      <h4>app/views/layouts/application.html.erb</h4><br>
+      <%= image_tag("008.png", alt: "pix") %>
+    </div> 
+    <div class="span8">
+      <br>
+      <h4>app/views/static_pages/ANYPAGE.html.erb</h4><br>
+      <%= image_tag("009.png", alt: "pix") %>
+    </div>
+	</ol>
+</section>

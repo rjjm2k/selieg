@@ -1,0 +1,54 @@
+<section id="html5">
+  <div class="page-header">
+    <h2>HTML 5</h2>
+  </div>
+  	<h3>
+  		Site Structure
+  	</h3>	
+  	<ol class="olist">
+  		<li>
+  			The structure of the site's content is located and edited in app/views/layouts/application.html.erb:<br>
+        <div class="row">
+          <div class="span8">
+          <%= image_tag("011.png", alt: "pix") %>
+          </div>
+        </div>
+        <ul>
+          This application renders the Shim in the Head. At the top of the Body the Navbar is rendered. The following Div-Container gives the Flash-Messages the appropriate width (in the middle of the page). The Yield fetches the current content of the application's visual body. The final Div-Container gives the rendered Footer's Border-Top-Line the appropriate width (in the middle of the page).
+        </ul>
+  		</li>
+  		<li>
+        What's new in HTML5:
+        <div class="row">
+          <div class="span8">
+          <%= image_tag("012.png", alt: "pix") %>
+          </div>
+        </div>
+        <ul>
+          If you want to add a stylesheet (like "lounge.css") or a JavaScript (like "lounge.js") you can add them in the Head.
+        </ul>
+      </li>
+      <li>
+        The structure of the site's Navbar is located in app/views/layouts/_navbar.html.erb:<br>
+        <div class="row">
+          <div class="span8">
+          <%= image_tag("013.png", alt: "pix") %>
+          </div>
+        </div>
+        <ul>
+          It starts with a header-tag and a Div navbar-inner. The Div-Container gives the inner-navbar the appropriate width.
+        </ul>
+      </li>
+      <li>
+        The structure of the site's Footer is located in app/views/layouts/_footer.html.erb:<br>
+        <div class="row">
+          <div class="span8">
+          <%= image_tag("014.png", alt: "pix") %>
+          </div>
+        </div>
+        <ul>
+          It starts with a footer-tag. The Div-Container gives the Footers content the appropriate width. Elements like "small" and "ul" are specified in the Stylesheet to be floated left or right.
+        </ul>
+      </li>
+  	</ol>
+</section>

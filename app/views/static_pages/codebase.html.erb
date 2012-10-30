@@ -1,0 +1,128 @@
+<% if signed_in? %>
+	<header class="jumbotron_subhead" id="overview">
+		<div class="container">
+			<h1>Codebase</h1>
+		</div>
+	</header>
+		<div class="container textarea">
+			<div class="row">
+				<div class="span3 sidebar">
+				  <ul class="nav nav-list bs-docs-sidenav affix-top">
+					<li>
+						<a href='#html5'>
+						<i class="icon-chevron-right"></i>
+						HTML5</a>
+					</li>
+					<li>
+						<a href='#css3'>
+						<i class="icon-chevron-right"></i>
+						CSS3</a>
+					</li>
+					<li>
+						<a href='#javascript'>
+						<i class="icon-chevron-right"></i>
+						JavaScript</a>
+					</li>
+					<li>
+						<a href='#git'>
+						<i class="icon-chevron-right"></i>
+						GIT, Github</a>
+					</li>
+					<li>
+						<a href='#heroku'>
+						<i class="icon-chevron-right"></i>
+						Heroku</a>
+					</li>
+					<li>
+						<a href='#bootstrap'>
+						<i class="icon-chevron-right"></i>
+						Bootstrap</a>
+					</li>
+					<li>
+						<a href='#rails'>
+						<i class="icon-chevron-right"></i>
+						Rails</a>
+							<ul>
+								<a href='#staticpagescontroller'>
+								<i class="icon-chevron-right"></i>
+								StaticPages Controller</a>
+							</ul>
+							<ul>
+								<a href='#userscontroller'>
+								<i class="icon-chevron-right"></i>
+								Users Controller</a>
+							</ul>
+							<ul>
+								<a href='#usermodel'>
+								<i class="icon-chevron-right"></i>
+								User Model</a>
+							</ul>
+							<ul>
+								<a href='#sessionscontroller'>
+								<i class="icon-chevron-right"></i>
+								Sessions Controller</a>
+							</ul>
+							<ul>
+								<a href='#micropostmodel'>
+								<i class="icon-chevron-right"></i>
+								Micropost Model</a>
+							</ul>
+							<ul>
+								<a href='#relationshipmodel'>
+								<i class="icon-chevron-right"></i>
+								Relationship Model</a>
+							</ul>
+					</li>
+					<li>
+						<a href='#ruby'>
+						<i class="icon-chevron-right"></i>
+						Ruby</a>
+					</li>
+					<li id="noborderbottom">
+						<a href='#rubygems'>
+						<i class="icon-chevron-right"></i>
+						Ruby Gems</a>
+					</li>
+				  </ul>
+				</div>
+				<div class="span9 offset3">
+					    <%= render 'codebase/html5' %>
+					    <%= render 'codebase/css3' %>
+					    <%= render 'codebase/javascript' %>
+					    <%= render 'codebase/git' %>
+					    <%= render 'codebase/heroku' %>
+					    <%= render 'codebase/bootstrap' %>
+					    <%= render 'rails/overview' %>
+					    <%= render 'codebase/ruby' %>
+					    <%= render 'codebase/rubygems' %>
+				</div>
+			</div>
+		</div>
+<% else %>
+		<header class="jumbotron_masthead">
+		<div class="container center">
+		  <h1 class="h1_main">SELIEG D-SIGN</h1>
+		  <h2 class="h2_main">
+		    we_don't_like_dem_cheaters
+		  </h2>
+		  <%= link_to "Sign up now!", signup_path, class: "btn btn-large btn-inverse" %>
+		</div>
+	</header>
+	<div class="container">
+		<div class="marketing center">
+			<div id="myCarousel" class="carousel slide">
+			  <!-- Carousel items -->
+			  <div class="carousel-inner">
+			    <div class="active item"><%= image_tag("carousel_001.png", alt: "screenshot1") %></div>
+			    <div class="item"><%= image_tag("carousel_002.png", alt: "screenshot2") %></div>
+			    <div class="item"><%= image_tag("carousel_003.png", alt: "screenshot3") %></div>
+			    <div class="item"><%= image_tag("carousel_004.png", alt: "screenshot4") %></div>
+			    <div class="item"><%= image_tag("carousel_005.png", alt: "screenshot5") %></div>
+			  </div>
+			  <!-- Carousel nav -->
+			  <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+			  <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+			</div>
+		</div>
+	</div>
+<% end %>

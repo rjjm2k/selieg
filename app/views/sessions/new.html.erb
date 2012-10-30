@@ -1,0 +1,28 @@
+<% provide(:title, "Anmeldung") %>
+
+<header class="jumbotron_subhead" id="overview">
+  <div class="container">
+    <h1>Anmeldung</h1>
+  </div>
+</header>
+
+<div class="container textarea">
+  <div class="row">
+    <div class="span4 offset4">
+      <%= form_for(:session, url: sessions_path) do |f| %>
+        
+        <%= f.label :email %>
+        <%= f.text_field :email %>
+
+        <%= f.label :password %>
+        <%= f.password_field :password %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span12 center">
+        <%= f.submit "Anmelden", class: "btn btn-large btn-inverse" %>
+      <% end %>
+      <p>Neuer User? <%= link_to "Registriere dich!", signup_path %></p>
+    </div>
+  </div>
+</div>
