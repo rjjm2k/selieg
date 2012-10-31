@@ -55,7 +55,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .h1_main {
-  font-size: 140px;
+  font-size: 120px;
   font-family: Proxima Nova Bl, Arial;
   color: $h1main;
   letter-spacing: -2px;
@@ -68,13 +68,13 @@ h1 {
   font-family: Proxima Nova Bl, Arial;
   letter-spacing: -2px;
   text-align: center;
-  margin: 25px 0 10px 0;
+  margin: 10px 0 10px 0;
   text-shadow: 0px 2px 4px #000000;
   filter: dropshadow(color=#000000, offx=0, offy=3);
 }
 
 .h2_main {
-  font-size: 50px;
+  font-size: 3.4em;
   font-family: Proxima Nova Bl, Arial;
   font-weight: bold;
   margin-bottom: 20px;
@@ -125,7 +125,7 @@ ol li {            /* ===== TEXT in codebase =====*/
 }
 
 .marketing {
-  margin-top: 490px;
+  margin-top: 400px;
 }
 
 .btn {
@@ -267,7 +267,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3892b7', end
 
   -webkit-box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, 0.6);
   box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, 0.6);
-  padding: 60px 0 70px 0;
+  padding: 60px 0 50px 0;
   color: white;
   margin: 0 0 0 0;
   position: absolute;
@@ -351,7 +351,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3892b7', end
 
 footer {
   font-size: 1em;
-  margin-top: 400px;
+  margin-top: 100px;
   padding-top: 10px;
   border-top: 3px solid #666666;
   color: $grayLight;
