@@ -66,12 +66,12 @@ class UsersController < ApplicationController
   end
 
   def index
-    @user = User.find(:all, :conditions => ['userindikator = ?', true])
+    @user = User.find(:all, :conditions => ['customer = ?', true])
     @users = User.paginate(page: params[:page])
   end
 
   def uni
-    @user = User.find(:all, :conditions => ['university = ?', true])
+    @user = User.find(:all, :conditions => ['uni = ?', true])
     @users = User.paginate(page: params[:page])
   end
 
@@ -97,9 +97,5 @@ class UsersController < ApplicationController
 
   def admin_user
       redirect_to(root_path) unless current_user.admin?
-  end
-
-  def user_is_user?
-    current_user == current_user.customer
   end
 end

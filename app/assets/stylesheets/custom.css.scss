@@ -55,11 +55,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .h1_main {
-  font-size: 120px;
+  font-size: 140px;
   font-family: Proxima Nova Bl, Arial;
   color: $h1main;
   letter-spacing: -2px;
-  text-shadow: 0px 5px 8px #000000;
+  text-shadow: 0px 4px 6px #000000;
   filter: dropshadow(color=#000000, offx=0, offy=3);
 }
 
@@ -74,12 +74,12 @@ h1 {
 }
 
 .h2_main {
-  font-size: 60px;
+  font-size: 50px;
   font-family: Proxima Nova Bl, Arial;
   font-weight: bold;
   margin-bottom: 20px;
   color: $h2main;
-  text-shadow: 0px 4px 6px #000000;
+  text-shadow: 0px 3px 4px #000000;
   filter: dropshadow(color=#000000, offx=0, offy=3);
 }
 

@@ -46,4 +46,8 @@ module SessionsHelper
     current_user.admin
   end
 
+  def user_be_user?
+    current_user.customer
+  end
+
 end

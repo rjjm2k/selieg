@@ -8,7 +8,6 @@
       <% if signed_in? %>
             <li><a href="/uni"><i class="icon-search icon-white"></i> UNIS</a></li>
             <li><a href="/users"><i class="icon-search icon-white"></i> USERS</a></li>
-            <li><a href="/codebase"><i class="icon-barcode icon-white"></i> CODEBASE</a></li>
             <li id="fat-menu" class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user icon-white"></i> ACCOUNT <b class="caret"></b>
               </a>
@@ -29,6 +28,8 @@
                 <li><%= link_to "Vorlesung erstellen",  signup_vorlesung_path %></li>
                 <li><%= link_to "Semester erstellen",   signup_semester_path %></li>
                 <li><%= link_to "Uni erstellen",        signup_uni_path %></li>
+                <li class="divider"></li>
+                <li><%= link_to "Codebase", codebase_path %></li>
               </ul>
             </li>
           <% end %>   
