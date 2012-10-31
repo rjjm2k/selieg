@@ -66,11 +66,17 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.paginate(page: params[:page])
+    @users = User.paginate( per_page: 20, 
+                            page: params[:page],
+                            conditions: ['customer = ?', true],
+                            order: 'name')
   end
 
   def uni
-    @users = User.paginate(page: params[:page])
+    @users = User.paginate( per_page: 20, 
+                            page: params[:page],
+                            conditions: ['uni = ?', true],
+                            order: 'name')
   end
 
   def destroy

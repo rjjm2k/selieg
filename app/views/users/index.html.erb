@@ -11,7 +11,7 @@
 	  <div class="span9 offset1">
 			<%= will_paginate %>
 				<ul class="users">
-				  <% @users.find(:all, :conditions => ['customer = ?', true]).each do |user| %>
+				  <% @users.each do |user| %>
 				    <%= render user %>
 				  <% end %>
 				</ul>
