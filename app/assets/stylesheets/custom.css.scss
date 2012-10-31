@@ -350,8 +350,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3892b7', end
 /* =============== FOOTER =============== */
 
 footer {
-  font-size: 1.2em;
-  margin-top: 500px;
+  font-size: 1em;
+  margin-top: 60px;
   padding-top: 10px;
   border-top: 3px solid #666666;
   color: $grayLight;
@@ -370,7 +370,7 @@ footer {
     list-style: none;
     li {
       float: left;
-      margin-left: 10px;
+      margin-left: 12px;
     }
   }
 }
