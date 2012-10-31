@@ -8,18 +8,11 @@
 
 <div class="container textarea">
 	<div class="row">
-	  <div class="span6 offset1">
+	  <div class="span9 offset1">
 			<%= will_paginate %>
 				<ul class="users">
-				  <% @user.each do |user| %>
-				    <li>
-				      <%= gravatar_for user %>
-				      <%= link_to user.name, user %>
-				      <% if current_user.admin? && !current_user?(user) %>
-				    | <%= link_to "delete", user, method: :delete,
-				                                  data: { confirm: "Sicher?" } %>
-						  <% end %>
-				    </li>
+				  <% @users.find(:all, :conditions => ['customer = ?', true]).each do |user| %>
+				    <%= render user %>
 				  <% end %>
 				</ul>
 			<%= will_paginate %>	

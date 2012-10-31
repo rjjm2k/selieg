@@ -20,12 +20,15 @@ resources :users do
 
   root to: 'static_pages#home'
 
-  match '/help',      to: 'static_pages#help'
-  match '/about',     to: 'static_pages#about'
-  match '/contact',   to: 'static_pages#contact'
-  match '/codebase',  to: 'static_pages#codebase'
-  match '/impressum', to: 'static_pages#impressum'
-  match '/uni',       to: 'users#uni'
+  match '/mitmachen',   to: 'static_pages#mitmachen'
+  match '/help',        to: 'static_pages#help'
+  match '/about',       to: 'static_pages#about'
+  match '/contact',     to: 'static_pages#contact'
+  match '/codebase',    to: 'static_pages#codebase'
+  match '/datenschutz', to: 'static_pages#datenschutz'
+  match '/cookies',     to: 'static_pages#cookies'
+  match '/impressum',   to: 'static_pages#impressum'
+  match '/uni',         to: 'users#uni'
 
 
   # The priority is based upon order of creation:

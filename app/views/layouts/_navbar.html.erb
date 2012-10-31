@@ -4,12 +4,13 @@
       <%= link_to "UN!PHOBIA", root_path, id: "logo" %>
         <nav class="nav- pull-right">
           <ul class="nav">
-            <li><a href="/"><i class="icon-home icon-white"></i> HOME</a></li>            
+            <li><%= link_to "HOME", root_path %></li>
+            <li><%= link_to "MITMACHEN", mitmachen_path %></li>            
       <% if signed_in? %>
             <li><a href="/uni"><i class="icon-search icon-white"></i> UNIS</a></li>
             <li><a href="/users"><i class="icon-search icon-white"></i> USERS</a></li>
             <li id="fat-menu" class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user icon-white"></i> ACCOUNT <b class="caret"></b>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">ACCOUNT <b class="caret"></b>
               </a>
               <ul class="dropdown-menu">
                 <li><%= link_to "Profil", current_user %></li>
@@ -22,7 +23,7 @@
             </li>
           <% if user_be_admin? %>
             <li id="fat-menu" class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-star icon-white"></i><b class="caret"></b>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-star icon-white"></i> <b class="caret"></b>
               </a>
               <ul class="dropdown-menu">
                 <li><%= link_to "Vorlesung erstellen",  signup_vorlesung_path %></li>
