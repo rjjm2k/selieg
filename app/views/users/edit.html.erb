@@ -2,7 +2,7 @@
 
 <header class="jumbotron_subhead" id="overview">
   <div class="container">
-    <h1>Ändere deine Einstellungen</h1>
+    <h1>Bearbeite deine Einstellungen</h1>
   </div>
 </header>
 
@@ -24,7 +24,7 @@
         <%= f.label :password_confirmation, "Passwort-Wiederholung" %>
         <%= f.password_field :password_confirmation %>
 
-        <%= f.submit "speichern!", class: "btn btn-large btn-primary" %>
+        <%= f.submit "speichern!", class: "btn btn-large btn-inverse buttonmargin" %>
       <% end %>
 
       <%= gravatar_for(@user) %>

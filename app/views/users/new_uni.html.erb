@@ -22,19 +22,17 @@
         <%= f.text_field :uni, value: true %>
 
         <%= f.label :customer, "Customer: false" %>
-        <%= f.text_field :customer %>
+        <%= f.text_field :customer, value: false %>
 
         <%= f.label :password, "Passwort" %>
         <%= f.password_field :password %>
 
         <%= f.label :password_confirmation, "PW-Wiederholung" %>
         <%= f.password_field :password_confirmation %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="span12 center">
-      <%= f.submit "Uni erstellen", class: "btn btn-large btn-inverse" %>
-    </div>
-  </div>
+
+        <%= f.submit "Uni erstellen", class: "btn btn-large btn-inverse buttonmargin" %>
+
       <% end %>
+    </div>
+  </div> 
 </div>

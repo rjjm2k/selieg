@@ -16,12 +16,9 @@
 
         <%= f.label :password %>
         <%= f.password_field :password %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="span12 center">
-        <%= f.submit "Anmelden", class: "btn btn-large btn-inverse" %>
-      <% end %>
+
+        <%= f.submit "Anmelden", class: "btn btn-large btn-inverse buttonmargin" %>
+        <% end %>        
       <p>Neuer User? <%= link_to "Registriere dich!", signup_path %></p>
     </div>
   </div>
