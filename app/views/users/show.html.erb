@@ -7,6 +7,7 @@
 </header>
 
 <div class="container textarea">
+
   <div class="row">
     <div class="span12">
       <% flash.each do |key, value| %>
@@ -15,6 +16,7 @@
       <% end %>
     </div>
   </div>
+
   <div class="row">
     <aside class="span4">
       <section>
@@ -32,6 +34,7 @@
         <%= render 'shared/stats' %>
       </section>
     </aside>
+
   <% unless user_be_user? %>
     <div class="span8">
       <%= render 'follow_form' if signed_in? %>
@@ -57,6 +60,7 @@
           <%= will_paginate %>
         <% end %>
     </div>  
+
   <% elsif @user.vorlesung %>
     <div class="span8">
       <%= render 'follow_form' if signed_in? %>
@@ -67,7 +71,8 @@
         </ol>
         <%= will_paginate @microposts %>
       <% end %>
-    </div>   
+    </div> 
+
   <% elsif @user.customer %>
     <div class="span8">
       <%= render 'follow_form' if signed_in? %>
@@ -78,7 +83,7 @@
         </ol>
         <%= will_paginate @microposts %>
       <% end %>
-    </div> 
-  </div>
-</div>
+    </div>
   <% end %>
+  
+</div>
