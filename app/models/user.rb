@@ -2,21 +2,26 @@
 #
 # Table name: users
 #
-#  id              :integer          not null, primary key
-#  name            :string(255)
-#  email           :string(255)
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
-#  password_digest :string(255)
-#  remember_token  :string(255)
-#  admin           :boolean          default(FALSE)
-#  uni             :boolean          default(FALSE)
-#  semester        :boolean          default(FALSE)
-#  vorlesung       :boolean          default(FALSE)
-#  customer        :boolean          default(TRUE)
-#  at_uni          :string(255)
-#  at_semester     :string(255)
-#  ects            :string(255)
+#  id                 :integer          not null, primary key
+#  name               :string(255)
+#  email              :string(255)
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  password_digest    :string(255)
+#  remember_token     :string(255)
+#  admin              :boolean          default(FALSE)
+#  uni                :boolean          default(FALSE)
+#  semester           :boolean          default(FALSE)
+#  vorlesung          :boolean          default(FALSE)
+#  customer           :boolean          default(TRUE)
+#  at_uni             :string(255)
+#  at_semester        :string(255)
+#  ects               :string(255)
+#  image              :string(255)
+#  photo_file_name    :string(255)
+#  photo_content_type :string(255)
+#  photo_file_size    :integer
+#  photo_updated_at   :datetime
 #
 
 class User < ActiveRecord::Base
@@ -31,7 +36,8 @@ class User < ActiveRecord::Base
                   	:customer,
                   	:at_uni,
                   	:at_semester,
-                  	:ects
+                  	:ects,
+                    :image
 
   has_secure_password
   has_many :microposts, dependent: :destroy
@@ -52,6 +58,8 @@ class User < ActiveRecord::Base
                     uniqueness: { case_sensitive: false }
   validates :password, presence: true, length: { minimum: 6 }
   validates :password_confirmation, presence: true
+
+  mount_uploader :image, ImageUploader
 
   def feed
     Micropost.from_users_followed_by(self)

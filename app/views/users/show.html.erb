@@ -8,84 +8,134 @@
 
 <div class="container textarea">
 
-  <div class="row">
-    <div class="span12">
-      <% flash.each do |key, value| %>
-        <div class="alert alert-<%= key %>"><%= value %>
-        </div>
-      <% end %>
+    <div class="row">
+      <div class="span12">
+        <% flash.each do |key, value| %>
+          <div class="alert alert-<%= key %>"><%= value %>
+          </div>
+        <% end %>
+      </div>
     </div>
-  </div>
 
-  <div class="row">
-    <aside class="span4">
-      <section>
-        <h3>
-          <%= gravatar_for @user %>
-          <%= @user.name %>
-        </h3>
-        <h4>
-          <%= @user.at_uni %><br>
-          <%= @user.at_semester %><br>
-          <%= @user.ects %><br>
-        </h4>
-      </section>
-      <section>
-        <%= render 'shared/stats' %>
-      </section>
-    </aside>
-
-  <% unless user_be_user? %>
-    <div class="span8">
-      <%= render 'follow_form' if signed_in? %>
-    </div>
-  <% end %>  
   <% if @user.uni %>
-    <div class="span8">
-        <h3><%= @title %></h3>
-        <% if @users.any? %>
-          <ul class="users">
-            <%= render @users %>
-          </ul>
-          <%= will_paginate %>
-        <% end %>
-    </div>
+      <div class="row">
+        <aside class="span4">
+          <section>
+            <h3>
+              <%= gravatar_for @user %>
+              <%= @user.name %>
+            </h3>
+          </section>
+          <section>
+            <%= render 'shared/stats' %>
+          </section>
+        </aside>
+
+        <div class="span8">
+          <% unless user_be_user? %>
+            <%= render 'follow_form' if signed_in? %>
+          <% end %>
+          <h3><%= @title %></h3>
+          <% if @users.any? %>
+            <ul class="users">
+              <%= render @users %>
+            </ul>
+            <%= will_paginate %>
+          <% end %>
+        </div>
+      </div>
+    
   <% elsif @user.semester %>
-    <div class="span8">
-        <h3><%= @title %></h3>
-        <% if @users.any? %>
-          <ul class="users">
-            <%= render @users %>
-          </ul>
-          <%= will_paginate %>
-        <% end %>
-    </div>  
+      <div class="row">
+        <aside class="span4">
+          <section>
+            <h3>
+              <%= gravatar_for @user %>
+              <%= @user.name %>
+            </h3>
+            <h4>
+              <%= @user.at_uni %><br>
+            </h4>
+          </section>
+          <section>
+            <%= render 'shared/stats' %>
+          </section>
+        </aside>
+   
+        <div class="span8">
+          <% unless user_be_user? %>
+            <%= render 'follow_form' if signed_in? %>
+          <% end %>
+          <h3><%= @title %></h3>
+          <% if @users.any? %>
+            <ul class="users">
+              <%= render @users %>
+            </ul>
+            <%= will_paginate %>
+          <% end %>
+        </div>  
+      </div>
 
   <% elsif @user.vorlesung %>
-    <div class="span8">
-      <%= render 'follow_form' if signed_in? %>
-      <% if current_user.following?(@user) %>
-        <% if @user.microposts.any? %>
-          <h3>Microposts (<%= @user.microposts.count %>)</h3>
-          <ol class="microposts">
-            <%= render @microposts %>
-          </ol>
-          <%= will_paginate @microposts %>
-        <% end %>
-      <% end %>
-    </div> 
+      <div class="row">
+        <aside class="span4">
+          <section>
+            <h3>
+              <%= gravatar_for @user %>
+              <%= @user.name %>
+            </h3>
+            <h4>
+              <%= @user.at_uni %><br>
+              <%= @user.at_semester %><br>
+              <%= @user.ects %><br>
+            </h4>
+          </section>
+          <section>
+            <%= render 'shared/stats' %>
+          </section>
+        </aside>
+
+        <div class="span8">
+          <%= render 'follow_form' if signed_in? %>
+          <% if current_user.following?(@user) %>
+            <% if @user.microposts.any? %>
+              <h3>Microposts (<%= @user.microposts.count %>)</h3>
+              <ol class="microposts">
+                <%= render @microposts %>
+              </ol>
+              <%= will_paginate @microposts %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
 
   <% elsif @user.customer %>
-    <div class="span8">
-      <%= render 'follow_form' if signed_in? %>
-      <% if @user.microposts.any? %>
-        <h3>Microposts (<%= @user.microposts.count %>)</h3>
-        <ol class="microposts">
-          <%= render @microposts %>
-        </ol>
-        <%= will_paginate @microposts %>
-      <% end %>
-    </div>
+      <div class="row">
+        <aside class="span4">
+          <section>
+            <h3>
+              <%= gravatar_for @user %>
+              <%= @user.name %>
+            </h3>
+            <h4>
+              <%= @user.at_uni %><br>
+            </h4>
+          </section>
+          <section>
+            <%= render 'shared/stats' %>
+          </section>
+        </aside>
+
+        <div class="span8">
+          <%= render 'follow_form' if signed_in? %>
+            <% if @user.microposts.any? %>
+              <h3>Microposts (<%= @user.microposts.count %>)</h3>
+              <ol class="microposts">
+                <%= render @microposts %>
+              </ol>
+              <%= will_paginate @microposts %>
+            <% end %>
+        </div>
   <% end %>
-  
+
 </div>

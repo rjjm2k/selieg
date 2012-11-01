@@ -434,6 +434,18 @@ aside {
   max-width: 51px;
 }
 
+#avatar_small {
+  float: left;
+  margin-right: 10px;
+  max-width: 100px;
+}
+
+#avatar_big {
+  float: left;
+  margin: 0 10px 20px 0;
+  max-width: 250px;
+}
+
 /* =============== FORMS =============== */
 
 input, textarea, select, .uneditable-input {
