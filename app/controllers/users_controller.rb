@@ -23,6 +23,7 @@ class UsersController < ApplicationController
     @title = "Followers"
     @user = User.find(params[:id])
     @users = @user.followers.paginate(page: params[:page])
+    @micropost  = current_user.microposts.build
   end
 
   def new
