@@ -14,7 +14,7 @@
 
 /* =============== VARIABLES =============== */
 
-$body: #EEEEEE;
+$thebody: #EEEEEE;
 $grayMediumLight: #eaeaea;
 $logo: #000000;
 $text: #333333;
@@ -37,10 +37,10 @@ html {
 
 body {
   font-family: Segoe UI, Arial;
-  background-color: $body;
+  background-color: $thebody;
   padding-top: 40px;
   position: relative;
-  }
+}
 
 .center {
   text-align: center;
@@ -103,6 +103,30 @@ h4 {
   font-size: 1.4em;
 }
 
+h5 > a {
+  font-size: 28px;
+  font-family: Proxima Nova Bl, Arial;
+  letter-spacing: -1px;
+  text-align: left;
+  color: $text;  
+  &:hover {
+    color: $text;
+    background-color: $grayMediumLight; 
+  }
+  &:visited {
+    color: $text;
+    background-color: $grayMediumLight;
+  }
+}
+
+h5 {
+  font-size: 28px;
+  font-family: Proxima Nova Bl, Arial;
+  letter-spacing: -1px;
+  text-align: left;
+  color: $text;  
+}
+
 .olist {
   padding: 0 0 60px 0;
 }
@@ -126,6 +150,16 @@ ol li {            /* ===== TEXT in codebase =====*/
 
 .marketing {
   margin-top: 400px;
+}
+
+.margin {
+  margin: 35px 0 35px 0;
+}
+
+.margin_little {
+  position: relative;
+  float: left;
+  padding: 20px 0 30px 0;
 }
 
 .btn {

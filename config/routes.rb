@@ -1,5 +1,13 @@
 Uniphobia::Application.routes.draw do
 
+  get "comments/create"
+
+  get "comments/destroy"
+
+  resources :posts do
+    resources :comments
+  end
+
 resources :users do
     member do
       get :following, :followers

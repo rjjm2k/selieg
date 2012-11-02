@@ -11,7 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121030222739) do
+ActiveRecord::Schema.define(:version => 20121102000625) do
+
+  create_table "comments", :force => true do |t|
+    t.integer  "post_id"
+    t.text     "text"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "microposts", :force => true do |t|
     t.string   "content"
@@ -21,6 +28,13 @@ ActiveRecord::Schema.define(:version => 20121030222739) do
   end
 
   add_index "microposts", ["user_id", "created_at"], :name => "index_microposts_on_user_id_and_created_at"
+
+  create_table "posts", :force => true do |t|
+    t.string   "title"
+    t.text     "text"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "relationships", :force => true do |t|
     t.integer  "follower_id"
@@ -36,18 +50,23 @@ ActiveRecord::Schema.define(:version => 20121030222739) do
   create_table "users", :force => true do |t|
     t.string   "name"
     t.string   "email"
-    t.datetime "created_at",                         :null => false
-    t.datetime "updated_at",                         :null => false
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
     t.string   "password_digest"
     t.string   "remember_token"
-    t.boolean  "admin",           :default => false
-    t.boolean  "uni",             :default => false
-    t.boolean  "semester",        :default => false
-    t.boolean  "vorlesung",       :default => false
-    t.boolean  "customer",        :default => true
+    t.boolean  "admin",              :default => false
+    t.boolean  "uni",                :default => false
+    t.boolean  "semester",           :default => false
+    t.boolean  "vorlesung",          :default => false
+    t.boolean  "customer",           :default => true
     t.string   "at_uni"
     t.string   "at_semester"
     t.string   "ects"
+    t.string   "image"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
