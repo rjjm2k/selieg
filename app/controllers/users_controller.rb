@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
-  before_filter :signed_in_user, only: [:uni, :index, :edit, :update, :show, :destroy, :following, :followers]
+  before_filter :signed_in_user, 
+  only: [:uni, :index, :edit, :update, :show, :destroy, :following, :followers]
+  
   before_filter :correct_user,   only: [:edit, :update]
   before_filter :admin_user,     only: :destroy
 
@@ -20,10 +22,6 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @microposts = @user.microposts.paginate(page: params[:page])
-    @title = "Followers"
-    @user = User.find(params[:id])
-    @users = @user.followers.paginate(page: params[:page])
-    @micropost  = current_user.microposts.build
   end
 
   def new

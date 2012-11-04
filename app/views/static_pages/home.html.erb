@@ -1,32 +1,5 @@
 <% if signed_in? %>
-	<header class="jumbotron_subhead" id="overview">
-		<div class="container">
-	    <h1>tweet out loud</h1>
-	  </div>
-	</header>
-	<div class="container textarea">
-	  <div class="row">
-	  	      <% flash.each do |key, value| %>
-        <div class="alert alert-<%= key %>"><%= value %>
-        </div>
-      <% end %>
-	    <aside class="span4">
-	      <section>
-	        <%= render 'shared/user_info' %>
-	      </section>
-	      <section>
-	        <%= render 'shared/stats' %>
-	      </section>
-	      <section>
-	        <%= render 'shared/micropost_form' %>
-	      </section>
-	    </aside>
-			<div class="span8">
-	      <h3>Neuigkeiten</h3>
-	      <%= render 'shared/feed' %>
-			</div>
-	  </div>
-	</div>	
+    <%= render 'static_pages/signed_in_home' %>
 <% else %>
     <%= render 'layouts/carousel' %>
 <% end %> 
